@@ -2,7 +2,7 @@ class CreateInventions < ActiveRecord::Migration
 
   def change
     create_table :inventions do |t|
-      t.name :string
+      t.string :name
       t.text :description
       t.string :status
       t.integer :inventor_id
