@@ -35,4 +35,20 @@ class InspectorController < ApplicationController
     erb :welcome_inspector
   end
 
+  get '/inventions/:slug/edit_by_inspector' do
+    @invention = Invention.find_by_slug(params[:slug])
+    erb :'inspectors/edit_by_inspector'
+  end
+
+  post '/inventions/:slug/edit_by_inspector' do
+    @invention = Invention.find_by_slug(params[:slug])
+    erb :'inspectors/edit_by_inspector'
+  end
+
+  post '/inventions/:slug' do
+    @invention = Invention.find_by_slug(params[:slug])
+    @invention.update(status: params[:status])
+    redirect to "/inventions/#{@invention.slug}"
+  end
+
 end

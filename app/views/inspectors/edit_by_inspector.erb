@@ -11,8 +11,10 @@
 <% end %>
 </div>
 
+<h2>You can update the Patent Status of the Invention here</h2>
+
 <h4>Name of the Invention: </h4>
-<h2><%= @invention.name %></h2>
+<h2><%= @invention.name %></p></h2>
 
 <br>
 
@@ -33,28 +35,18 @@
   <ul>
     <li><%= category.name.capitalize %></li>
   </ul>
-<% end %>
+<% end %><br></br>
 
-<br>
+  <h4>Status of the Patent: </h4><br>
 
-<h4>Status of the Patent: </h4><br>
-<%= @invention.status.capitalize %>
+  <form action="/inventions/<%= @invention.slug %>" method="POST">
 
-<br></br>
+  <input type="radio" name="status" value="pending" checked> pending</input><br>
+  <input type="radio" name="status" value="granted"> granted</input><br>
+  <input type="radio" name="status" value="rejected"> rejected</input><br></br>
 
-<form action="/inventions/<%= @invention.slug %>/edit" method="POST">
-  <input type="submit" value="Edit Invention"></input>
+  <input type="submit" value="Update Patent Status"></input>
+
 </form>
-<br>
-<form action="/inventions/<%= @invention.slug %>/delete" method="POST">
-  <input type="submit" value="Delete Invention"></input>
-</form>
-<br>
-<% if current_user.class == Inspector %>
-  <form action="/inventions/<%= @invention.slug %>/edit_by_inspector" method="POST">
-    <input type="submit" value="Edit By Inspector"></input>
-  </form>
-<% end %>
 <br></br>
-
 <p><a href="/inventions">Click here to view all Inventions</a></p>
