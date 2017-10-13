@@ -52,6 +52,9 @@ class InventorController < ApplicationController
   get '/inventors/:slug' do
     @inventor = Inventor.find_by_slug(params[:slug])
     @inventions = @inventor.inventions
+    @slugs = []
+    @inventions.each { |invention| @slugs << invention.slug }
+    @slugs
     erb :'/inventors/show_inventor'
   end
 

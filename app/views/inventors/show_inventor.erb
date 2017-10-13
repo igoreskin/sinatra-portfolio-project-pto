@@ -17,9 +17,11 @@
 
 <h3>Inventions: </h3><br>
 
-<% @inventions.each do |invention| %>
-  <h4><%= invention.name %></h4>
-  <p>- <%= invention.description %></p>
+<% @slugs.each do |slug| %>
+  <div class="invention">
+  <h4><a href="/inventions/<%=slug%>"><%= Invention.find_by_slug(slug).name %></a></h4>
+  <p>- <%= Invention.find_by_slug(slug).description %></p>
+  </div>
 <% end %>
 
 <br>
