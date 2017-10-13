@@ -13,6 +13,7 @@ class InventionController < ApplicationController
 
   get '/welcome' do
     if logged_in?
+      @inventor = current_user
       erb :welcome_page
     else
       redirect to '/login'
@@ -80,7 +81,7 @@ class InventionController < ApplicationController
     end
     if @invention.inventor_id != @inventor.id
       flash[:message] = "You can only edit your own inventions!"
-      redirect to "/inventions/#{@invention.slug}/edit"
+      redirect to "/inventions/#{@invention.slug}"
     end
     if params[:status] != "pending"
       flash[:message] = "To update the patent status of an invention you must be logged in as an Inspector!"

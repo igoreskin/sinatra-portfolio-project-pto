@@ -1,0 +1,35 @@
+<style>
+  .flash {
+    color: red;
+    font-size: 20px;
+  }
+</style>
+
+<div class="flash">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+<h2>You can edit your profile and update your password here</h2>
+
+<h3>Name of the Inventor: </h3>
+
+<h2><%= @inventor.name %></h2>
+
+<form action="/inventors/<%= @inventor.slug %>" method="POST">
+
+  <input id="hidden" type="hidden" name="_method" value="patch"></input>
+  <label for="username">Username: </label>
+  <input id="username" type="text" name="username" value="<%= @inventor.username %>"></input><br></br>
+  <label for="email">Email: </label>
+  <input id="email" type="text" name="email" value="<%= @inventor.email %>"></input><br></br>
+  <label for="password">Password: </label>
+  <input id="password" type="password" name="password" value="<%= @inventor.password %>"></input><br></br>
+
+  <br>
+
+  <p><input type="submit" value="Edit Profile"></input></p>
+
+
+</form>

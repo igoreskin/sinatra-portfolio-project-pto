@@ -1,6 +1,5 @@
 require 'pry'
 require './config/environment'
-require 'rack-flash'
 
 class InventorController < ApplicationController
 
@@ -9,6 +8,9 @@ class InventorController < ApplicationController
   include Slugifiable::InstanceMethods
 
   get '/inventors' do
+    @slugs = []
+    Inventor.all.each { |inventor| @slugs << inventor.slug }
+    @slugs
     erb :'inventors/inventors'
   end
 
@@ -50,6 +52,48 @@ class InventorController < ApplicationController
     @inventor = Inventor.find_by_slug(params[:slug])
     @inventions = @inventor.inventions
     erb :'/inventors/show_inventor'
+  end
+
+  get '/inventors/:slug/edit' do
+    @inventor = Inventor.find_by_slug(params[:slug])
+    erb :'/inventors/edit_inventor'
+  end
+
+  post '/inventors/:slug/edit' do
+    @inventor = Inventor.find_by_slug(params[:slug])
+    erb :'/inventors/edit_inventor'
+  end
+
+  patch '/inventors/:slug' do
+    @inventor = Inventor.find_by_slug(params[:slug])
+    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+      if @inventor == current_user
+        @inventor.update(username: params[:username], email: params[:email], password: params[:password])
+        redirect to "/inventors/#{@inventor.slug}"
+      else
+        flash[:message] = "You can only edit your own profile!"
+        redirect to "/inventors/#{@inventor.slug}"
+      end
+    else
+      flash[:message] = "You must enter username, email and password to edit your profile!"
+      redirect to "/inventors/#{@inventor.slug}"
+    end
+  end
+
+  post '/inventors/:slug/delete' do
+    @inventor = Inventor.find_by_slug(params[:slug])
+    if logged_in? && @inventor == current_user && @inventor.class == Inventor
+      erb :'/inventors/delete_inventor'
+    else
+      flash[:message] = "You can only delete your own profile!"
+      redirect to "/inventors/#{@inventor.slug}"
+    end
+  end
+
+  delete '/inventors/:slug/delete' do
+    @inventor = Inventor.find_by_slug(params[:slug])
+    @inventor.destroy
+    redirect to '/logout'
   end
 
   get '/logout' do

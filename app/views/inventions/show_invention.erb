@@ -1,10 +1,25 @@
+<style>
+  .flash {
+    color: red;
+    font-size: 20px;
+  }
+</style>
+
+<div class="flash">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
 <h4>Name of the Invention: </h4>
 <h2><%= @invention.name %></h2>
 
 <br>
 
+<% if @invention.inventor %>
 <h4>Name of the Inventor: </h4>
 <h2><a href="/inventors/<%=@invention.inventor.slug%>"><%= @invention.inventor.name %></a></h2>
+<% end %>
 
 <br>
 

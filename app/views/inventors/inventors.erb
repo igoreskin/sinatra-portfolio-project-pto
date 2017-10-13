@@ -1,1 +1,22 @@
-Inventors
+<style>
+  .flash {
+    color: red;
+    font-size: 20px;
+  }
+</style>
+
+<div class="flash">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+<h2>List of Inventors</h2>
+
+<% @slugs.each do |slug| %>
+  <div class="inventor">
+  <a href="/inventors/<%=slug%>"><%= Inventor.find_by_slug(slug).name %></a><br></br>
+  </div>
+<% end %>
+
+<br>
