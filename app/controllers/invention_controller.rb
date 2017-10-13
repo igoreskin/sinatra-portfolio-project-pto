@@ -113,18 +113,4 @@ class InventionController < ApplicationController
     redirect to '/inventions'
   end
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      if session[:user_id] <= 1000
-        Inventor.find(session[:user_id])
-      else
-        Inspector.find(session[:user_id])
-      end
-    end
-  end
-
 end

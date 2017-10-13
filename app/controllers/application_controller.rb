@@ -13,4 +13,18 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      if session[:user_id] <= 1000
+        Inspector.find(session[:user_id])
+      else
+        Inventor.find(session[:user_id])
+      end
+    end
+  end
+
 end

@@ -35,15 +35,4 @@ class InspectorController < ApplicationController
     erb :welcome_inspector
   end
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      Inspector.find(session[:user_id])
-    end
-  end
-
-
 end
