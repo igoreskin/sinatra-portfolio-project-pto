@@ -1,5 +1,6 @@
 require 'pry'
 require './config/environment'
+require 'rack-flash'
 
 class InventorController < ApplicationController
 
@@ -99,9 +100,19 @@ class InventorController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
-      redirect '/login'
+      redirect '/'
     else
-      redirect '/login'
+      redirect '/'
+    end
+  end
+
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      Inventor.find(session[:user_id])
     end
   end
 

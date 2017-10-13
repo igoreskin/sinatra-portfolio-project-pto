@@ -6,6 +6,8 @@
 
 <p><a href="/inventors">To view the list of inventors, click here</a></p>
 
-<p><a href="/inventors/<%= @inventor.slug %>">To view your profile, click here</a></p>
+<% if @user.class == Inventor %>
+<p><a href="/inventors/<%= @user.slug %>">To view your profile, click here</a></p>
 
 <p><a href="inventions/new">To file a new invention, click here</a></p>
+<% end %>

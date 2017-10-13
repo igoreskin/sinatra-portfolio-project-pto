@@ -1,5 +1,6 @@
 require 'pry'
 require './config/environment'
+require 'rack-flash'
 
 class InventionController < ApplicationController
 
@@ -13,7 +14,7 @@ class InventionController < ApplicationController
 
   get '/welcome' do
     if logged_in?
-      @inventor = current_user
+      @user = current_user
       erb :welcome_page
     else
       redirect to '/login'
@@ -110,6 +111,16 @@ class InventionController < ApplicationController
     @invention = Invention.find_by_slug(params[:slug])
     @invention.destroy
     redirect to '/inventions'
+  end
+
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      Inventor.find(session[:user_id])
+    end
   end
 
 end
