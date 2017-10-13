@@ -16,7 +16,7 @@ class InspectorController < ApplicationController
     if !logged_in?
       erb :'/inspectors/inspector_login'
     else
-      redirect '/welcome'
+      redirect '/welcome_inspector'
     end
   end
 
@@ -24,11 +24,15 @@ class InspectorController < ApplicationController
     @user = Inspector.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect '/welcome'
+      redirect '/welcome_inspector'
     else
       flash[:message] = "You have to enter username and password to log in!"
       redirect '/inspector_login'
     end
+  end
+
+  get '/welcome_inspector' do
+    erb :welcome_inspector
   end
 
   helpers do

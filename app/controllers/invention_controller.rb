@@ -119,7 +119,11 @@ class InventionController < ApplicationController
     end
 
     def current_user
-      Inventor.find(session[:user_id])
+      if session[:user_id] <= 1000
+        Inventor.find(session[:user_id])
+      else
+        Inspector.find(session[:user_id])
+      end
     end
   end
 
