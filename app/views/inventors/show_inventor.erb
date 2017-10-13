@@ -1,0 +1,14 @@
+<h3>Name of the Inventor: </h3>
+
+<h2><%= @inventor.name %></h2>
+
+<h3>Inventions: </h3><br>
+
+<% @inventions.each do |invention| %>
+  <h4><%= invention.name %></h4>
+  <p>- <%= invention.description %></p>
+<% end %>
+
+<br>
+
+<p><a href="/inventions">Click here to view all Inventions</a></p>

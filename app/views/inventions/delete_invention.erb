@@ -1,0 +1,12 @@
+<h2>Are you sure you want to permanently delete this Invention?</h2>
+
+<form action="/inventions/<%= @invention.slug %>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete"></input>
+  <input type="submit" value="YES"></input>
+</form>
+
+<br>
+
+<form action="/inventions/<%= @invention.slug %>" method="GET">
+  <input type="submit" value="NO"></input>
+</form>

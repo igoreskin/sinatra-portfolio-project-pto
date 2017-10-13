@@ -1,0 +1,23 @@
+<h5>Name of the Category: </h5>
+<br>
+<h4><%= @category.name.capitalize %></h4>
+
+<br>
+
+<h5>Inventors who have filed inventions in this Category: </h5>
+<br>
+<% @inventor_slugs.each do |slug| %>
+<ul>
+  <li><a href="/inventors/<%=slug%>"><%= Inventor.find_by_slug(slug).name %></a></li><br>
+</ul>
+<% end %>
+
+<br>
+
+<h5>Inventions in this Category: </h5>
+<br>
+<% @invention_slugs.each do |slug| %>
+<ul>
+  <li><a href="inventions/<%=slug%>"><%= Invention.find_by_slug(slug).name %></a></li><br>
+</ul>
+<% end %>

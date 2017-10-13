@@ -5,4 +5,9 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
+
+use InventionController
+use InventorController
+use CategoryController
+use InspectorController
 run ApplicationController

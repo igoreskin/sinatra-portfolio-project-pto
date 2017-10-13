@@ -1,0 +1,34 @@
+<h4>Name of the Invention: </h4>
+<h2><%= @invention.name %></h2>
+
+<br>
+
+<h4>Name of the Inventor: </h4>
+<h2><a href="/inventors/<%=@invention.inventor.slug%>"><%= @invention.inventor.name %></a></h2>
+
+<br>
+
+<h4>Description of the Invention: </h4><br>
+<p><%= @invention.description %></p>
+
+<br>
+
+<h4>Categories of the Invention: </h4><br>
+<% @invention.categories.each do |category| %>
+  <ul>
+    <li><%= category.name.capitalize %></li>
+  </ul>
+<% end %>
+
+<br></br>
+
+<form action="/inventions/<%= @invention.slug %>/edit" method="POST">
+  <input type="submit" value="Edit Invention"></input>
+</form>
+<br>
+<form action="/inventions/<%= @invention.slug %>/delete" method="POST">
+  <input type="submit" value="Delete Invention"></input>
+</form>
+<br></br>
+
+<p><a href="/inventions">Click here to view all Inventions</a></p>

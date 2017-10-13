@@ -1,0 +1,41 @@
+<style>
+  textarea {
+    width: 300px;
+    height: 100px;
+  }
+  .flash {
+    color: red;
+    font-size: 20px;
+  }
+</style>
+
+<div class="flash">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+<h2>Please file your New Invention here</h2>
+
+<form action="/inventions" method="POST">
+
+  <label for="invention_name">Name of the Invention: </label>
+  <input id="invention_name" type="text" name="name" placeholder="Name of the Invention"></input><br></br>
+  <label for="invention_description">Description of the Invention: </label><br></br>
+  <textarea id="invention_description" name="description" placeholder="Description of the Invention"></textarea><br></br>
+
+  <h4>Please select the Categories of your New Invention:</h4><br>
+
+  <% Category.all.each do |category| %>
+  <input id="<%=category.name%>" type="checkbox" name="categories[]" value="<%=category.id%>"><%= category.name %></input><br>
+  <% end %><br>
+
+  <h4>Status of the Patent: </h4><br>
+
+  <input type="radio" name="status" value="pending" checked> pending</input><br>
+  <input type="radio" name="status" value="granted"> granted</input><br>
+  <input type="radio" name="status" value="rejected"> rejected</input><br></br>
+
+  <input type="submit" value="Submit"></input>
+
+</form>

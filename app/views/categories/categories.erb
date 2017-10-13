@@ -1,0 +1,13 @@
+<h4>List of Invention Categories</h4>
+
+<br></br>
+
+<% @categories.each do |category| %>
+<ul>
+  <li><a href="/categories/<%=category.name%>"><%= category.name.capitalize %></a></li><br>
+</ul>
+<% end %>
+
+<br>
+
+<p><a href="/inventions">Please click here to view all Inventions</a></p>
