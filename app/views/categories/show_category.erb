@@ -18,7 +18,7 @@
 <br>
 <% @invention_slugs.each do |slug| %>
 <ul>
-  <li><a href="inventions/<%=slug%>"><%= Invention.find_by_slug(slug).name %></a></li><br>
+  <li><a href="/inventions/<%=slug%>"><%= Invention.find_by_slug(slug).name %></a></li><br>
 </ul>
 <% end %>
 

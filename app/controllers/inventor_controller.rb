@@ -1,10 +1,9 @@
 require 'pry'
 require './config/environment'
-require 'rack-flash'
 
 class InventorController < ApplicationController
 
-  use Rack::Flash
+
   extend Slugifiable::ClassMethods
   include Slugifiable::InstanceMethods
 

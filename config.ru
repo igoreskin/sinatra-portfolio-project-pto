@@ -6,8 +6,8 @@ end
 
 use Rack::MethodOverride
 
-use InventionController
 use InventorController
-use CategoryController
 use InspectorController
+use InventionController
+use CategoryController
 run ApplicationController
