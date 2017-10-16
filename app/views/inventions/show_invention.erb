@@ -42,6 +42,7 @@
 
 <br></br>
 
+<% if current_user.class == Inventor %>
 <form action="/inventions/<%= @invention.slug %>/edit" method="POST">
   <input type="submit" value="Edit Invention"></input>
 </form>
@@ -49,10 +50,11 @@
 <form action="/inventions/<%= @invention.slug %>/delete" method="POST">
   <input type="submit" value="Delete Invention"></input>
 </form>
+<% end %>
 <br>
 <% if current_user.class == Inspector %>
   <form action="/inventions/<%= @invention.slug %>/edit_by_inspector" method="POST">
-    <input type="submit" value="Edit By Inspector"></input>
+    <input type="submit" value="Update Patent Status"></input>
   </form>
 <% end %>
 <br></br>
